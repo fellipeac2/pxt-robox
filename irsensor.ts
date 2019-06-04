@@ -6,8 +6,8 @@ namespace robox {
     /**
     * Reads the number
     */
-    //% weight=30 blockId="robox_irsensor" block="Get ir-return"
-    export function irsensor(): number{
+    //% weight=30 blockId="robox_irsensor" block="Get ir-return %command"
+    export function irsensor(command: number): number{
 	pins.i2cWriteNumber(
 		10,
 		command,
