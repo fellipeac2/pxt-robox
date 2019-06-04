@@ -1,0 +1,15 @@
+{
+    "name": "robox",
+    "version": "0.0.3",
+    "description": "",
+    "license": "MIT",
+    "dependencies": {
+        "core": "*"
+    },
+    "files": [
+        "README.md",
+        "irsensor.ts"
+    ],
+    "testFiles": [],
+    "public": true
+}
