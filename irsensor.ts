@@ -7,10 +7,25 @@ namespace robox {
     * Reads the number
     */
     //% weight=30 blockId="robox_irsensor" block="Get ir-return %command"
-    export function irsensor(): number{
+    export function irsensor1(): number{
 	pins.i2cWriteNumber(
 		10,
 		114,
+		NumberFormat.UInt8LE,
+		true
+	)
+	let value = pins.i2cReadNumber(10, NumberFormat.UInt8LE, false) 
+	basic.pause(10)
+	return value
+    }
+    /**
+    * Reads the number
+    */
+    //% weight=30 blockId="robox_irsensor" block="Get ir-return %command"
+    export function irsensor2(): number{
+	pins.i2cWriteNumber(
+		10,
+		76,
 		NumberFormat.UInt8LE,
 		true
 	)
