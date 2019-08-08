@@ -4,7 +4,7 @@ namespace robox {
     // Functions for reading light from the gatorlight in lux or straight adv value
 
     /**
-    * Reads the number
+    * Reads the number 1
     */
     //% weight=30 blockId="robox_irsensor1" block="Get ir-return1 %command"
     export function irsensor1(): number{
@@ -19,7 +19,7 @@ namespace robox {
 	return value
     }
     /**
-    * Reads the number
+    * Reads the number 2
     */
     //% weight=30 blockId="robox_irsensor2" block="Get ir-return2 %command"
     export function irsensor2(): number{
