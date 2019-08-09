@@ -1,3 +1,6 @@
+/**
+  * Enumeration of approximity sensors.
+  */
 enum ApproximitySensor {
 	//% block="A1"
 	A1,
