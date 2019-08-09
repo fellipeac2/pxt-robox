@@ -77,4 +77,41 @@ namespace robox {
 		infrareds.push(sensor)
 	}
 
+	/**
+	 * Reads approximity in cm.
+	 * @param sensor sensor id
+	 */
+	//% blockId="robox_ultrasound" block="Approximity of %sensor in cm"
+	//% weight=30 
+	//% sensor.shadow="ultrasound_enum_shim"
+	export function ultrasoundRead(sensor: number): number {
+		pins.i2cWriteNumber(
+			10,
+			68,
+			NumberFormat.UInt8LE,
+			true
+		)
+		let value = pins.i2cReadNumber(10, NumberFormat.UInt8LE, false)
+		basic.pause(10)
+		return value
+	}
+
+	/**
+	 * Reads intensity of line follower sensor
+	 * @param sensor sensor id
+	 * @param type type of sensor
+	 */
+	//% weight=30 blockId="robox_linefollower" block="Intensity of Line Follower Sensor %sensor %type"
+	//% sensor.shadow="infrared_enum_shim"
+	export function lineFollowerRead(sensor: number, type: TypeLineFollowerSensor): number{
+		pins.i2cWriteNumber(
+			10,
+			type,
+			NumberFormat.UInt8LE,
+			true
+		)
+		let value = pins.i2cReadNumber(10, NumberFormat.UInt8LE, false) 
+		basic.pause(10)
+		return value
+	}
 }
