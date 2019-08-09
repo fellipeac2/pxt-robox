@@ -32,25 +32,35 @@ enum LineFollowerSensor {
 	//% block="L1"
 	L1 = 11
 	//% block="L2"
-	L1 = 12
-	//% block="L3"
-	L1 = 13
+	L2 = 12
+		/*	//% block="L3"
+	L3 = 13
 	//% block="L4"
-	L1 = 14
+	L4 = 14
 	//% block="L5"
-	L1 = 15
+	L5 = 15
 	//% block="L6"
-	L1 = 16
+	L6 = 16
 	//% block="L7"
-	L1 = 17
+	L7 = 17
 	//% block="L8"
-	L1 = 18
+	L8 = 18
 	//% block="L9"
-	L1 = 19
+	L9 = 19
 	//% block="L10"
-	L1 = 20
+	L10 = 20*/
 }
 
+//% shim=ENUM_GET
+//% blockId=LineFollowerSensorShim
+//% block="LineFollowerSensor $arg"
+//% enumName="LineFollowerSensor"
+//% enumMemberName="Sensor Name"
+//% enumPromptHint="A3"
+//% enumInitialMembers="L1, L2"
+export function _lineFollowerSensorShim(arg: number) {
+	return arg;
+}
 /**
  * Enumeration of Type Line Follower Sensor.
  */
@@ -72,7 +82,7 @@ namespace robox {
 	 * @param sensor sensor id
 	 */
 	//% blockId="robox_ultrasound" block="Approximity of %sensor in cm"
-	//% weight=100 
+	//% weight=30 
 	export function ultrasound(sensor: ApproximitySensor): number {
 		pins.i2cWriteNumber(
 			sensor,
@@ -91,7 +101,7 @@ namespace robox {
 	 * @param sensor sensor id
 	 * @param type type of sensor
 	 */
-	//% weight=30 blockId="robox_linefollower" block="Read line follower intensity of sensor %sensor %type"
+	//% weight=30 blockId="robox_linefollower" block="Intensity of Line Follower Sensor %sensor %type"
 	export function linefollower(sensor: LineFollowerSensor, type: TypeLineFollowerSensor): number{
 		pins.i2cWriteNumber(
 			sensor,
@@ -102,6 +112,16 @@ namespace robox {
 		let value = pins.i2cReadNumber(sensor, NumberFormat.UInt8LE, false) 
 		basic.pause(10)
 		return value
+	}
+
+	/**
+	 * Write velocity in dc motor.
+	 * @param motor motor id
+	 * @param velocity target velocity of motor
+	 */
+	//% weight=30 blockId="robox_writeVelocityMotor" block="Write motor velocity in %motor %velocity"
+	export function writeVelocityMotor(motor: Motor, velocity: number) {
+
 	}
 
 }
