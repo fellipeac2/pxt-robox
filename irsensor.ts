@@ -8,7 +8,7 @@ namespace robox {
     export function ultrasom(): number {
     	pins.i2cWriteNumber(
 		10,
-		'D'
+		68,
 		NumberFormat.UInt8LE,
 		true
 	)
