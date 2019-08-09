@@ -1,5 +1,5 @@
 /**
-  * Enumeration of approximity sensors.
+  * Enumeration of Approximity Sensors.
   */
 enum ApproximitySensor {
 	//% block="A1"
@@ -21,9 +21,46 @@ enum ApproximitySensor {
 	//% block="A9"
 	A9 = 29,
 	//% block="A10"
-	A10 = 10,
+	A10 = 30,
 
 }
+
+/**
+ * Enumeration of Line Follower Sensors.
+ */
+enum LineFollowerSensor {
+	//% block="L1"
+	L1 = 11
+	//% block="L2"
+	L1 = 12
+	//% block="L3"
+	L1 = 13
+	//% block="L4"
+	L1 = 14
+	//% block="L5"
+	L1 = 15
+	//% block="L6"
+	L1 = 16
+	//% block="L7"
+	L1 = 17
+	//% block="L8"
+	L1 = 18
+	//% block="L9"
+	L1 = 19
+	//% block="L10"
+	L1 = 20
+}
+
+/**
+ * Enumeration of Type Line Follower Sensor.
+ */
+enum TypeLineFollowerSensor {
+	//% block="left"
+	LEFT = 114
+	//% block="right"
+	RIGHT = 76
+}
+
 /**
  * Main blocks
  */
@@ -34,7 +71,7 @@ namespace robox {
 	 * Reads approximity in cm.
 	 * @param sensor sensor id
 	 */
-	//% blockId="robox_ultrasound" block="Approximity of %sensor"
+	//% blockId="robox_ultrasound" block="Approximity of %sensor in cm"
 	//% weight=100 
 	export function ultrasound(sensor: ApproximitySensor): number {
 		pins.i2cWriteNumber(
@@ -50,32 +87,19 @@ namespace robox {
 
 
 	/**
-	 * Reads the number 1
+	 * Reads intensity of line follower sensor
+	 * @param sensor sensor id
+	 * @param type type of sensor
 	 */
-	//% weight=30 blockId="robox_irsensor1" block="Read infrared sensor %command"
-	export function irsensor1(): number{
+	//% weight=30 blockId="robox_linefollower" block="Read line follower intensity of sensor %sensor %type"
+	export function linefollower(sensor: LineFollowerSensor, type: TypeLineFollowerSensor): number{
 		pins.i2cWriteNumber(
-			10,
-			114,
+			sensor,
+			type,
 			NumberFormat.UInt8LE,
 			true
 		)
-		let value = pins.i2cReadNumber(10, NumberFormat.UInt8LE, false) 
-		basic.pause(10)
-		return value
-	}
-	/**
-	 * Reads the number 2
-	 */
-	//% weight=30 blockId="robox_irsensor2" block="Get ir-return2 %command"
-	export function irsensor2(): number{
-		pins.i2cWriteNumber(
-			10,
-			76,
-			NumberFormat.UInt8LE,
-			true
-		)
-		let value = pins.i2cReadNumber(10, NumberFormat.UInt8LE, false) 
+		let value = pins.i2cReadNumber(sensor, NumberFormat.UInt8LE, false) 
 		basic.pause(10)
 		return value
 	}
