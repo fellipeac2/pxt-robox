@@ -13,8 +13,10 @@ enum TypeLineFollowerSensor {
 //% weight=100 color=#f44242 icon="\uf185"
 namespace robox {
 
-	let ultrasounds = new Map()
-	let infrareds = new Map()
+	let ultrasounds : Sensor[]
+	let ultrasoundIds : number[]
+	let infrareds : Sensor[]
+	let infraredIds : number[]
 
 	export class Sensor { 
 		_address : number
@@ -68,7 +70,8 @@ namespace robox {
 	//% block="define Ultrasound Sensor $name $sensor"
 	//% name.shadow="ultrasound_enum_shim"
 	export function defineUtrasoundSensor(name : number, sensor : Sensor) {
-		ultrasounds.set(name, sensor)
+		ultrasounds.push(sensor)
+		ultrasoundIds.push(name)
 	}
 
 	/**
@@ -78,7 +81,8 @@ namespace robox {
 	//% block="define Infrared Sensor $name $sensor"
 	//% name.shadow="infrared_enum_shim"
 	export function defineInfraredSensor(name : number, sensor : Sensor) {
-		infrareds.set(name, sensor)
+		infrareds.push(sensor)
+		infraredIds.push(name)
 	}
 
 	/**
@@ -89,13 +93,14 @@ namespace robox {
 	//% weight=30 
 	//% sensor.shadow="ultrasound_enum_shim"
 	export function ultrasoundRead(sensor: number): number {
+		let address = infrareds[infraredIds.findIndex(sensor)]
 		pins.i2cWriteNumber(
-			ultrasounds.get(sensor).getAddress(),
+			address,
 			68,
 			NumberFormat.UInt8LE,
 			true
 		)
-		let value = pins.i2cReadNumber(ultrasounds.get(sensor).getAddress(), NumberFormat.UInt8LE, false)
+		let value = pins.i2cReadNumber(address, NumberFormat.UInt8LE, false)
 		basic.pause(10)
 		return value
 	}
@@ -108,13 +113,14 @@ namespace robox {
 	//% weight=30 blockId="robox_linefollower" block="Intensity of Line Follower Sensor %sensor %type"
 	//% sensor.shadow="infrared_enum_shim"
 	export function lineFollowerRead(sensor: number, type: TypeLineFollowerSensor): number{
+		let address = ultrasounds[ultrasoundIds.findIndex(sensor)]
 		pins.i2cWriteNumber(
-			infrareds.get(sensor).getAddress(),
+			address,
 			type,
 			NumberFormat.UInt8LE,
 			true
 		)
-		let value = pins.i2cReadNumber(infrareds.get(sensor).getAddress(), NumberFormat.UInt8LE, false) 
+		let value = pins.i2cReadNumber(address, NumberFormat.UInt8LE, false) 
 		basic.pause(10)
 		return value
 	}
