@@ -1,6 +1,22 @@
 //% color=#f44242 icon="\uf185"
 namespace robox {
 
+    /**
+    * Reads utrasom
+    */
+    //% weight=30 blockId="robox_ultrasom" block="Get ultrassom %command"
+    export function ultrasom(): number {
+    	pins.i2cWriteNumber(
+		10,
+		'D'
+		NumberFormat.UInt8LE,
+		true
+	)
+	let value = pins.i2cReadNumber(10, NumberFormat.UInt8LE, false)
+	basic.pause(10)
+	return value
+    }
+
     // Functions for reading light from the gatorlight in lux or straight adv value
 
     /**
