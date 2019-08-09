@@ -24,18 +24,18 @@ enum ApproximitySensor {
 	A10,
 
 }
-
+/**
+ * Main blocks
+ */
 //% weight=100 color=#f44242 icon="\uf185"
 namespace robox {
 
 	/**
 	 * Reads approximity in cm.
-	 * @param sensor id
+	 * @param sensor sensor id
 	 */
 	//% blockId="robox_ultrasound" block="Approximity of %sensor in robox"
-	// %weight=100 
-	// %duration.shadow=timePicker
-	// %expandableArgumentMode="toggle"
+	//% weight=100 
 	export function ultrasound(sensor: ApproximitySensor): number {
 		pins.i2cWriteNumber(
 			10,
