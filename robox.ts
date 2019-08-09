@@ -12,11 +12,10 @@ namespace robox {
 	//% enumPromptHint="e.g. B, C, ..."
 	//% enumInitialMembers="A"
 	//% enumStartValue=11
+	//% enumStopValue=13
 	export function _flagEnumShim(arg: number) {
 		// This function should do nothing, but must take in a single
 		// argument of type number and return a number value.
-		if(arg >= 13)
-			return false
 		return arg;
 	}
 
