@@ -1,4 +1,3 @@
-
 enum ApproximitySensor {
 	//% block="A1"
 	A1,
@@ -20,62 +19,63 @@ enum ApproximitySensor {
 	A9,
 	//% block="A10"
 	A10,
-	
+
 }
 
-//% weight=50 color=#f44242 icon="\uf185"
+//% weight=100 color=#f44242 icon="\uf185"
 namespace robox {
 
-    /**
-     * Reads approximity in cm.
-     * @param sensor id
-    */
-	//% weight=100 blockId="robox_ultrasound" block="Approximity of %sensor"
+	/**
+	 * Reads approximity in cm.
+	 * @param sensor id
+	 */
+	//% blockId="robox_ultrasound" block="Approximity of %sensor|sensor(s)"
+	// weight=100 
 	// duration.shadow=timePicker
 	// expandableArgumentMode="toggle"
-    export function ultrasound(sensor: ApproximitySensor): number {
-    	pins.i2cWriteNumber(
-		10,
-		69,
-		NumberFormat.UInt8LE,
-		true
-	)
-	let value = pins.i2cReadNumber(10, NumberFormat.UInt8LE, false)
-	basic.pause(10)
-	return value
-    }
+	export function ultrasound(sensor: ApproximitySensor): number {
+		pins.i2cWriteNumber(
+			10,
+			69,
+			NumberFormat.UInt8LE,
+			true
+		)
+		let value = pins.i2cReadNumber(10, NumberFormat.UInt8LE, false)
+		basic.pause(10)
+		return value
+	}
 
-    // Functions for reading light from the gatorlight in lux or straight adv value
+	// Functions for reading light from the gatorlight in lux or straight adv value
 
-    /**
-    * Reads the number 1
-    */
-    //% weight=30 blockId="robox_irsensor1" block="Get ir-return1 %command"
-    export function irsensor1(): number{
-	pins.i2cWriteNumber(
-		10,
-		114,
-		NumberFormat.UInt8LE,
-		true
-	)
-	let value = pins.i2cReadNumber(10, NumberFormat.UInt8LE, false) 
-	basic.pause(10)
-	return value
-    }
-    /**
-    * Reads the number 2
-    */
-    //% weight=30 blockId="robox_irsensor2" block="Get ir-return2 %command"
-    export function irsensor2(): number{
-	pins.i2cWriteNumber(
-		10,
-		76,
-		NumberFormat.UInt8LE,
-		true
-	)
-	let value = pins.i2cReadNumber(10, NumberFormat.UInt8LE, false) 
-	basic.pause(10)
-	return value
-    }
+	/**
+	 * Reads the number 1
+	 */
+	//% weight=30 blockId="robox_irsensor1" block="Get ir-return1 %command"
+	export function irsensor1(): number{
+		pins.i2cWriteNumber(
+			10,
+			114,
+			NumberFormat.UInt8LE,
+			true
+		)
+		let value = pins.i2cReadNumber(10, NumberFormat.UInt8LE, false) 
+		basic.pause(10)
+		return value
+	}
+	/**
+	 * Reads the number 2
+	 */
+	//% weight=30 blockId="robox_irsensor2" block="Get ir-return2 %command"
+	export function irsensor2(): number{
+		pins.i2cWriteNumber(
+			10,
+			76,
+			NumberFormat.UInt8LE,
+			true
+		)
+		let value = pins.i2cReadNumber(10, NumberFormat.UInt8LE, false) 
+		basic.pause(10)
+		return value
+	}
 
 }
