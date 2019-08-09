@@ -21,7 +21,7 @@ enum ApproximitySensor {
 	//% block="A9"
 	A9 = 29,
 	//% block="A10"
-	A10 = 30,
+	A10 = 10,
 
 }
 /**
@@ -38,12 +38,12 @@ namespace robox {
 	//% weight=100 
 	export function ultrasound(sensor: ApproximitySensor): number {
 		pins.i2cWriteNumber(
-			10,
+			sensor,
 			69,
 			NumberFormat.UInt8LE,
 			true
 		)
-		let value = pins.i2cReadNumber(10, NumberFormat.UInt8LE, false)
+		let value = pins.i2cReadNumber(sensor, NumberFormat.UInt8LE, false)
 		basic.pause(10)
 		return value
 	}
