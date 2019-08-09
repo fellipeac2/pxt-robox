@@ -48,7 +48,6 @@ namespace robox {
 		return value
 	}
 
-	// Functions for reading light from the gatorlight in lux or straight adv value
 
 	/**
 	 * Reads the number 1
