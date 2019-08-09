@@ -1,15 +1,26 @@
 
 enum ApproximitySensor {
+	//% block="A1"
 	A1,
+	//% block="A2"
 	A2,
+	//% block="A3"
 	A3,
+	//% block="A4"
 	A4,
+	//% block="A5"
 	A5,
+	//% block="A6"
 	A6,
+	//% block="A7"
 	A7,
+	//% block="A8"
 	A8,
+	//% block="A9"
 	A9,
-	A10
+	//% block="A10"
+	A10,
+	
 }
 
 //% color=#f44242 icon="\uf185"
@@ -22,7 +33,7 @@ namespace robox {
 	//% weight=100 blockId="robox_ultrasound" block="Approximity of %sensor"
 	// duration.shadow=timePicker
 	// expandableArgumentMode="toggle"
-    export function ultrasound(sensor?: ApproximitySensor): number {
+    export function ultrasound(sensor: ApproximitySensor): number {
     	pins.i2cWriteNumber(
 		10,
 		69,
