@@ -1,90 +1,105 @@
 /**
-  * Enumeration of Approximity Sensors.
-  */
-enum ApproximitySensor {
-	//% block="A1"
-	A1 = 21,
-	//% block="A2"
-	A2 = 22,
-	//% block="A3"
-	A3 = 23,
-	//% block="A4"
-	A4 = 24,
-	//% block="A5"
-	A5 = 25,
-	//% block="A6"
-	A6 = 26,
-	//% block="A7"
-	A7 = 27,
-	//% block="A8"
-	A8 = 28,
-	//% block="A9"
-	A9 = 29,
-	//% block="A10"
-	A10 = 30,
-
-}
-
-/**
- * Enumeration of Line Follower Sensors.
- */
-enum LineFollowerSensor {
-	//% block="L1"
-	L1 = 11
-	//% block="L2"
-	L2 = 12
-		/*	//% block="L3"
-	L3 = 13
-	//% block="L4"
-	L4 = 14
-	//% block="L5"
-	L5 = 15
-	//% block="L6"
-	L6 = 16
-	//% block="L7"
-	L7 = 17
-	//% block="L8"
-	L8 = 18
-	//% block="L9"
-	L9 = 19
-	//% block="L10"
-	L10 = 20*/
-}
-
-
-/**
  * Enumeration of Type Line Follower Sensor.
  */
 enum TypeLineFollowerSensor {
 	//% block="left"
-	LEFT = 114
+	LEFT = 114,
 	//% block="right"
 	RIGHT = 76
 }
-
 /**
- * Main blocks
+ * Functions that create objects should store them in variables.
  */
-//% weight=100 color=#f44242 icon="\uf185"
+//% color="#AA278D"
 namespace robox {
+
+	let ultrasounds : Sensor[]
+	let infrareds : Sensor[]
+
+	//%
+	export class Sensor { 
+		_address : number
+
+		constructor(address : number) {
+			this._address = address
+		}
+	}
+
+
+	//% shim=ENUM_GET
+	//% blockId=ultrasoud_enum_shim
+	//% block="Ultrasound $arg"
+	//% enumName="Ultrasounds"
+	//% enumMemberName="ultrasound"
+	//% enumPromptHint="e.g. U1, U2"
+	//% enumInitialMembers="U1"
+	export function _ultrasoundNameEnumShim(arg: number) {
+		// This function should do nothing, but must take in a single
+		// argument of type number and return a number value.
+		return arg;
+	}
+
+	//% shim=ENUM_GET
+	//% blockId=infrared_enum_shim
+	//% block="Infrared $arg"
+	//% enumName="Infrareds"
+	//% enumMemberName="infrared"
+	//% enumPromptHint="e.g. IR1, IR2"
+	//% enumInitialMembers="IR1"
+	export function _infraredNameEnumShim(arg: number) {
+		// This function should do nothing, but must take in a single
+		// argument of type number and return a number value.
+		return arg;
+	}
+
+
+	/**
+	 * Create a sensor of robox.
+	 * @param address address of sensor
+	 */
+	//% block="sensor of address %address"
+	export function createSensor(address : number): Sensor {
+		return new Sensor(address);
+	}
+
+	/**
+	 * Define an ultrasound sensor of robox.
+	 */
+	//% blockId=define_ultrasoud_sensor
+	//% block="define Ultrasound Sensor $name $sensor"
+	//% name.shadow="ultrasoud_enum_shim"
+	export function defineUtrasoundSensor(name : number, sensor : Sensor) {
+		ultrasounds.push(sensor)
+	}
+
+	/**
+	 * Define an infrared sensor of robox.
+	 */
+	//% blockId=define_infrared_sensor
+	//% block="define Infrared Sensor $name $sensor"
+	//% name.shadow="infrared_enum_shim"
+	export function defineInfraredSensor(name : number, sensor : Sensor) {
+		ultrasounds.push(sensor)
+	}
+
 	/**
 	 * Reads approximity in cm.
 	 * @param sensor sensor id
 	 */
 	//% blockId="robox_ultrasound" block="Approximity of %sensor in cm"
 	//% weight=30 
-	export function ultrasound(sensor: ApproximitySensor): number {
+	//% sensor.shadow="ultrasoud_enum_shim"
+	export function ultrasoundRead(sensor: number): number {
 		pins.i2cWriteNumber(
-			sensor,
-			69,
+			ultrasounds[sensor],
+			68,
 			NumberFormat.UInt8LE,
 			true
 		)
-		let value = pins.i2cReadNumber(sensor, NumberFormat.UInt8LE, false)
+		let value = pins.i2cReadNumber(ultrasounds[sensor], NumberFormat.UInt8LE, false)
 		basic.pause(10)
 		return value
 	}
-
 
 	/**
 	 * Reads intensity of line follower sensor
@@ -92,26 +107,16 @@ namespace robox {
 	 * @param type type of sensor
 	 */
 	//% weight=30 blockId="robox_linefollower" block="Intensity of Line Follower Sensor %sensor %type"
-	export function linefollower(sensor: LineFollowerSensor, type: TypeLineFollowerSensor): number{
+	//% sensor.shadow="infrared_enum_shim"
+	export function lineFollowerRead(sensor: number, type: TypeLineFollowerSensor): number{
 		pins.i2cWriteNumber(
-			sensor,
+			infrareds[sensor],
 			type,
 			NumberFormat.UInt8LE,
 			true
 		)
-		let value = pins.i2cReadNumber(sensor, NumberFormat.UInt8LE, false) 
+		let value = pins.i2cReadNumber(infrareds[sensor], NumberFormat.UInt8LE, false) 
 		basic.pause(10)
 		return value
 	}
-
-	/**
-	 * Write velocity in dc motor.
-	 * @param motor motor id
-	 * @param velocity target velocity of motor
-	 */
-	//% weight=30 blockId="robox_writeVelocityMotor" block="Write motor velocity in %motor %velocity"
-	export function writeVelocityMotor(motor: Motor, velocity: number) {
-
-	}
-
 }
