@@ -3,25 +3,25 @@
   */
 enum ApproximitySensor {
 	//% block="A1"
-	A1,
+	A1 = 21,
 	//% block="A2"
-	A2,
+	A2 = 22,
 	//% block="A3"
-	A3,
+	A3 = 23,
 	//% block="A4"
-	A4,
+	A4 = 24,
 	//% block="A5"
-	A5,
+	A5 = 25,
 	//% block="A6"
-	A6,
+	A6 = 26,
 	//% block="A7"
-	A7,
+	A7 = 27,
 	//% block="A8"
-	A8,
+	A8 = 28,
 	//% block="A9"
-	A9,
+	A9 = 29,
 	//% block="A10"
-	A10,
+	A10 = 30,
 
 }
 /**
