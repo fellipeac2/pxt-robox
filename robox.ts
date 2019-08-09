@@ -19,7 +19,7 @@ namespace robox {
      * Reads approximity in cm.
      * @param sensor id
     */
-    //% weight=30 blockId="robox_ultrasound" block="Approximity || of %sensor"
+    //% blockId="robox_ultrasound" block="Approximity || of %sensor"
     export function ultrasound(sensor?: ApproximitySensor): number {
     	pins.i2cWriteNumber(
 		10,
