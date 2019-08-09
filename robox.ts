@@ -30,9 +30,9 @@ namespace robox {
 	 * @param sensor id
 	 */
 	//% blockId="robox_ultrasound" block="Approximity of %sensor in robox"
-	// weight=100 
-	// duration.shadow=timePicker
-	// expandableArgumentMode="toggle"
+	// %weight=100 
+	// %duration.shadow=timePicker
+	// %expandableArgumentMode="toggle"
 	export function ultrasound(sensor: ApproximitySensor): number {
 		pins.i2cWriteNumber(
 			10,
