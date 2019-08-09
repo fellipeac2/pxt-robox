@@ -23,7 +23,7 @@ enum ApproximitySensor {
 	
 }
 
-//% color=#f44242 icon="\uf185"
+//% weight=50 color=#f44242 icon="\uf185"
 namespace robox {
 
     /**
