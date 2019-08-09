@@ -51,16 +51,7 @@ enum LineFollowerSensor {
 	L10 = 20*/
 }
 
-//% shim=ENUM_GET
-//% blockId=LineFollowerSensorShim
-//% block="LineFollowerSensor $arg"
-//% enumName="LineFollowerSensor"
-//% enumMemberName="Sensor Name"
-//% enumPromptHint="A3"
-//% enumInitialMembers="L1, L2"
-export function _lineFollowerSensorShim(arg: number) {
-	return arg;
-}
+
 /**
  * Enumeration of Type Line Follower Sensor.
  */
@@ -76,7 +67,19 @@ enum TypeLineFollowerSensor {
  */
 //% weight=100 color=#f44242 icon="\uf185"
 namespace robox {
-
+	//% shim=ENUM_GET
+	//% blockId=flag_enum_shim
+	//% block="Flag $arg"
+	//% enumName="Flags"
+	//% enumMemberName="flag"
+	//% enumPromptHint="e.g. B, C, ..."
+	//% enumInitialMembers="A"
+	//% enumIsBitMask=false
+	export function _flagEnumShim(arg: number) {
+		// This function should do nothing, but must take in a single
+		// argument of type number and return a number value.
+		return arg;
+	}
 	/**
 	 * Reads approximity in cm.
 	 * @param sensor sensor id
