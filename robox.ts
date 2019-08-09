@@ -13,8 +13,8 @@ enum TypeLineFollowerSensor {
 //% weight=100 color=#f44242 icon="\uf185"
 namespace robox {
 
-	let ultrasounds : Sensor[]
-	let infrareds : Sensor[]
+	let ultrasounds = new Map()
+	let infrareds = new Map()
 
 	export class Sensor { 
 		_address : number
@@ -66,9 +66,9 @@ namespace robox {
 	 */
 	//% blockId=define_ultrasound_sensor
 	//% block="define Ultrasound Sensor $name $sensor"
-	//% name.shadow="ultrasoud_enum_shim"
+	//% name.shadow="ultrasound_enum_shim"
 	export function defineUtrasoundSensor(name : number, sensor : Sensor) {
-		ultrasounds.push(sensor)
+		ultrasounds.set(name, sensor)
 	}
 
 	/**
@@ -78,7 +78,7 @@ namespace robox {
 	//% block="define Infrared Sensor $name $sensor"
 	//% name.shadow="infrared_enum_shim"
 	export function defineInfraredSensor(name : number, sensor : Sensor) {
-		infrareds.push(sensor)
+		infrareds.set(name, sensor)
 	}
 
 	/**
@@ -90,12 +90,12 @@ namespace robox {
 	//% sensor.shadow="ultrasound_enum_shim"
 	export function ultrasoundRead(sensor: number): number {
 		pins.i2cWriteNumber(
-			ultrasounds[sensor].getAddress(),
+			ultrasounds.get(sensor).getAddress(),
 			68,
 			NumberFormat.UInt8LE,
 			true
 		)
-		let value = pins.i2cReadNumber(ultrasounds[sensor].getAddress(), NumberFormat.UInt8LE, false)
+		let value = pins.i2cReadNumber(ultrasounds.get(sensor).getAddress(), NumberFormat.UInt8LE, false)
 		basic.pause(10)
 		return value
 	}
@@ -109,12 +109,12 @@ namespace robox {
 	//% sensor.shadow="infrared_enum_shim"
 	export function lineFollowerRead(sensor: number, type: TypeLineFollowerSensor): number{
 		pins.i2cWriteNumber(
-			infrareds[sensor].getAddress(),
+			infrareds.get(sensor).getAddress(),
 			type,
 			NumberFormat.UInt8LE,
 			true
 		)
-		let value = pins.i2cReadNumber(infrareds[sensor].getAddress(), NumberFormat.UInt8LE, false) 
+		let value = pins.i2cReadNumber(infrareds.get(sensor).getAddress(), NumberFormat.UInt8LE, false) 
 		basic.pause(10)
 		return value
 	}
