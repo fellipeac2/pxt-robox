@@ -80,51 +80,5 @@ namespace robox {
 		// argument of type number and return a number value.
 		return arg;
 	}
-	/**
-	 * Reads approximity in cm.
-	 * @param sensor sensor id
-	 */
-	//% blockId="robox_ultrasound" block="Approximity of %sensor in cm"
-	//% weight=30 
-	export function ultrasound(sensor: ApproximitySensor): number {
-		pins.i2cWriteNumber(
-			sensor,
-			69,
-			NumberFormat.UInt8LE,
-			true
-		)
-		let value = pins.i2cReadNumber(sensor, NumberFormat.UInt8LE, false)
-		basic.pause(10)
-		return value
-	}
-
-
-	/**
-	 * Reads intensity of line follower sensor
-	 * @param sensor sensor id
-	 * @param type type of sensor
-	 */
-	//% weight=30 blockId="robox_linefollower" block="Intensity of Line Follower Sensor %sensor %type"
-	export function linefollower(sensor: LineFollowerSensor, type: TypeLineFollowerSensor): number{
-		pins.i2cWriteNumber(
-			sensor,
-			type,
-			NumberFormat.UInt8LE,
-			true
-		)
-		let value = pins.i2cReadNumber(sensor, NumberFormat.UInt8LE, false) 
-		basic.pause(10)
-		return value
-	}
-
-	/**
-	 * Write velocity in dc motor.
-	 * @param motor motor id
-	 * @param velocity target velocity of motor
-	 */
-	//% weight=30 blockId="robox_writeVelocityMotor" block="Write motor velocity in %motor %velocity"
-	export function writeVelocityMotor(motor: Motor, velocity: number) {
-
-	}
 
 }
