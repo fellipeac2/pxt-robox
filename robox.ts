@@ -13,11 +13,6 @@ enum TypeLineFollowerSensor {
 //% weight=100 color=#f44242 icon="\uf185"
 namespace robox {
 
-	let ultrasounds = 0
-	let ultrasoundIds = 0
-	let infrareds = 0
-	let infraredIds = 0
-
 	export class Sensor { 
 		_address : number
 
@@ -29,6 +24,12 @@ namespace robox {
 			return this._address
 		}
 	}
+
+	let ultrasounds : Sensor[]
+	let ultrasoundIds : number[]
+	let infrareds : Sensor[]
+	let infraredIds : number[]
+
 
 
 	//% shim=ENUM_GET
