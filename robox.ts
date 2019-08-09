@@ -29,7 +29,7 @@ namespace robox {
 	 * Reads approximity in cm.
 	 * @param sensor id
 	 */
-	//% blockId="robox_ultrasound" block="Approximity of %sensor|sensor(s)"
+	//% blockId="robox_ultrasound" block="Approximity of %sensor in robox"
 	// weight=100 
 	// duration.shadow=timePicker
 	// expandableArgumentMode="toggle"
