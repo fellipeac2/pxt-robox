@@ -107,7 +107,7 @@ namespace robox {
 	//% blockId=define_motor
 	//% block="Define Motor Left $leftId and Right $rightId"
 	export function defineMotor(leftId: number, rightId: number) {
-		if(left != right) {
+		if(leftId != rightId) {
 			motorLeftAddress = leftId
 			motorRightAddress = rightId
 		}
@@ -161,11 +161,44 @@ namespace robox {
 	//% weight=30 blockId="robox_write_velocity" block="Write velocity $velocity in motor $motor"
 	//% velocity.min=-100 velocity.max=100
 	export function writeVelocity(velocity: number, motor: Motor) {
+		let address = 0
+		switch(motor) {
+			case Motor.LEFT:
+				address = motorLeftAddress
+				break;
+			case Motor.RIGHT:
+				address = motorRightAddress
+				break
+		}
+		if(address == 0)
+			return
 		if(velocity < -100)
 			velocity = -100
 		else if(velocity > 100)
 			velocity = 100
-		
+		if(velocity < 0) {
+			velocity = -1*velocity
+			pins.digitalWritePin(DigitalPin.P1, 1)
+			pins.digitalWritePin(DigitalPin.P8, 0)
+		} else {
+			pins.digitalWritePin(DigitalPin.P1, 0)
+			pins.digitalWritePin(DigitalPin.P8, 1)
+		}
+		velocity = pins.map(velocity, 0, 100, 0, 255)
+		pins.i2cWriteNumber(
+			address,
+			118,
+			NumberFormat.UInt8LE,
+			true
+		)
+		pins.i2cWriteNumber(
+			address,
+			velocity,
+			NumberFormat.UInt8LE,
+			false
+		)
+		basic.pause(5)
+
 	}
 
 }
