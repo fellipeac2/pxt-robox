@@ -7,6 +7,16 @@ enum TypeLineFollowerSensor {
 	//% block="right"
 	RIGHT = 76
 }
+
+/**
+ * Enumeration of Motor.
+ */
+enum Motor {
+	//% block="left"
+	LEFT = 0,
+	//% block="right"
+	RIGHT = 1
+}
 /**
  * Robox namespace
  */
@@ -25,11 +35,14 @@ namespace robox {
 		}
 	}
 
+
 	let ultrasounds : Sensor[] = []
 	let ultrasoundIds : number[] = []
 	let infrareds : Sensor[] = []
 	let infraredIds : number[] = []
-
+	
+	let motorLeftAddress = 0
+	let motorRightAddress = 0
 
 
 	//% shim=ENUM_GET
@@ -68,7 +81,7 @@ namespace robox {
 	 * Define an ultrasound sensor of robox.
 	 */
 	//% blockId=define_ultrasound_sensor
-	//% block="define Ultrasound Sensor $name $sensor"
+	//% block="Define Ultrasound Sensor $name $sensor"
 	//% name.shadow="ultrasound_enum_shim"
 	export function defineUtrasoundSensor(name : number, sensor : Sensor) {
 		ultrasounds.push(sensor)
@@ -79,11 +92,25 @@ namespace robox {
 	 * Define an infrared sensor of robox.
 	 */
 	//% blockId=define_infrared_sensor
-	//% block="define Infrared Sensor $name $sensor"
+	//% block="Define Infrared Sensor $name $sensor"
 	//% name.shadow="infrared_enum_shim"
 	export function defineInfraredSensor(name : number, sensor : Sensor) {
 		infrareds.push(sensor)
 		infraredIds.push(name)
+	}
+
+	/**
+	 * Define the motors of robox.
+	 * @param leftId id of motor left
+	 * @param rightId id of motor right
+	 */
+	//% blockId=define_motor
+	//% block="Define Motor Left $leftId and Right $rightId"
+	export function defineMotor(leftId: number, rightId: number) {
+		if(left != right) {
+			motorLeftAddress = leftId
+			motorRightAddress = rightId
+		}
 	}
 
 	/**
@@ -126,4 +153,14 @@ namespace robox {
 		basic.pause(10)
 		return value
 	}
+
+	/**
+	 * Write velocity in motor.
+	 * @param motor motor for set velocity
+	 */
+	//% weight=30 blockId="robox_write_velocity" block="Write velocity $velocity in $motor"
+	//% velocity.min=-100 velocity.max=100
+	export function writeVelocity(velocity: number, motor: Motor) {
+	}
+
 }
