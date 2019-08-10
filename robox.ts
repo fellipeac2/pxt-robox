@@ -50,8 +50,8 @@ namespace robox {
 	//% block="Ultrasound $arg"
 	//% enumName="Ultrasounds"
 	//% enumMemberName="ultrasound"
-	//% enumPromptHint="e.g. U1, U2"
-	//% enumInitialMembers="U1"
+	//% enumPromptHint="e.g. US1, US2"
+	//% enumInitialMembers="US1"
 	export function _ultrasoundNameEnumShim(arg: number) {
 		return arg;
 	}
@@ -117,7 +117,7 @@ namespace robox {
 	 * Reads approximity in cm.
 	 * @param sensor sensor id
 	 */
-	//% blockId="robox_ultrasound" block="Approximity of %sensor in cm"
+	//% blockId="robox_ultrasound" block="approximity of %sensor in cm"
 	//% weight=30 
 	//% sensor.shadow="ultrasound_enum_shim"
 	export function ultrasoundRead(sensor: number): number {
@@ -139,7 +139,7 @@ namespace robox {
 	 * @param sensor sensor id
 	 * @param type type of sensor
 	 */
-	//% weight=30 blockId="robox_linefollower" block="Intensity of Line Follower Sensor %sensor %type"
+	//% weight=30 blockId="robox_linefollower" block="intensity of line follower sensor %sensor %type"
 	//% sensor.shadow="infrared_enum_shim"
 	export function lineFollowerRead(sensor: number, type: TypeLineFollowerSensor): number{
 		let address = infrareds[infraredIds.indexOf(sensor)].getAddress()
