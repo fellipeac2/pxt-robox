@@ -41,8 +41,8 @@ namespace robox {
 	let infrareds : Sensor[] = []
 	let infraredIds : number[] = []
 	
-	let motorLeftAddress = 0
-	let motorRightAddress = 0
+	let motorLeftAddress : number = 0
+	let motorRightAddress : number = 0
 
 
 	//% shim=ENUM_GET
