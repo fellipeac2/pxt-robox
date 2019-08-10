@@ -25,10 +25,10 @@ namespace robox {
 		}
 	}
 
-	let ultrasounds : Sensor[]
-	let ultrasoundIds : number[]
-	let infrareds : Sensor[]
-	let infraredIds : number[]
+	let ultrasounds : Sensor[] = []
+	let ultrasoundIds : number[] = []
+	let infrareds : Sensor[] = []
+	let infraredIds : number[] = []
 
 
 
@@ -94,7 +94,8 @@ namespace robox {
 	//% weight=30 
 	//% sensor.shadow="ultrasound_enum_shim"
 	export function ultrasoundRead(sensor: number): number {
-		let address = 10//infrareds[infraredIds.indexOf(sensor)].getAddress()
+		let address = ultrasounds[ultrasoundIds.indexOf(sensor)].getAddress()
+
 		pins.i2cWriteNumber(
 			address,
 			68,
@@ -114,7 +115,7 @@ namespace robox {
 	//% weight=30 blockId="robox_linefollower" block="Intensity of Line Follower Sensor %sensor %type"
 	//% sensor.shadow="infrared_enum_shim"
 	export function lineFollowerRead(sensor: number, type: TypeLineFollowerSensor): number{
-		let address = 10//ultrasounds[ultrasoundIds.indexOf(sensor)].getAddress()
+		let address = infrareds[infraredIds.indexOf(sensor)].getAddress()
 		pins.i2cWriteNumber(
 			address,
 			type,
