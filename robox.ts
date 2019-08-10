@@ -162,9 +162,13 @@ namespace robox {
 	//% velocity.min=-100 velocity.max=100
 	export function writeVelocity(velocity: number, motor: Motor) {
 		let address = 0
+		let in1 = DigitalPin.P1
+		let in2 = DigitalPin.P8
 		switch(motor) {
 			case Motor.LEFT:
 				address = motorLeftAddress
+				in1 = DigitalPin.P2
+				in2 = DigitalPin.P13
 				break;
 			case Motor.RIGHT:
 				address = motorRightAddress
@@ -178,11 +182,11 @@ namespace robox {
 			velocity = 100
 		if(velocity < 0) {
 			velocity = -1*velocity
-			pins.digitalWritePin(DigitalPin.P1, 1)
-			pins.digitalWritePin(DigitalPin.P8, 0)
+			pins.digitalWritePin(in1, 1)
+			pins.digitalWritePin(in2, 0)
 		} else {
-			pins.digitalWritePin(DigitalPin.P1, 0)
-			pins.digitalWritePin(DigitalPin.P8, 1)
+			pins.digitalWritePin(in1, 0)
+			pins.digitalWritePin(in2, 1)
 		}
 		velocity = pins.map(velocity, 0, 100, 0, 255)
 		pins.i2cWriteNumber(
