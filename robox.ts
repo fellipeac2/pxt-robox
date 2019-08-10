@@ -158,9 +158,14 @@ namespace robox {
 	 * Write velocity in motor.
 	 * @param motor motor for set velocity
 	 */
-	//% weight=30 blockId="robox_write_velocity" block="Write velocity $velocity in $motor"
+	//% weight=30 blockId="robox_write_velocity" block="Write velocity $velocity in motor $motor"
 	//% velocity.min=-100 velocity.max=100
 	export function writeVelocity(velocity: number, motor: Motor) {
+		if(velocity < -100)
+			velocity = -100
+		else if(velocity > 100)
+			velocity = 100
+		
 	}
 
 }
