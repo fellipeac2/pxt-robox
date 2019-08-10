@@ -44,6 +44,16 @@ namespace robox {
 	let motorLeftAddress : number = 0
 	let motorRightAddress : number = 0
 
+	//% shim=ENUM_GET
+	//% blockId=teste_enum_shim
+	//% block="Teste $arg"
+	//% enumName="Testes"
+	//% enumMemberName="teste"
+	//% enumPromptHint="e.g. US1, US2"
+	//% enumInitialMembers="teste1"
+	export function _testeNameEnumShim(arg: number) {
+		return 2;
+	}
 
 	//% shim=ENUM_GET
 	//% blockId=ultrasound_enum_shim
