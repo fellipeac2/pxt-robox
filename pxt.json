@@ -1,7 +1,7 @@
 {
     "name": "robox",
-    "version": "0.0.3",
-    "description": "",
+    "version": "0.1.5",
+    "description": "Microsoft MakeCode package for Robox Educational Kit",
     "license": "MIT",
     "dependencies": {
         "core": "*"
@@ -11,5 +11,6 @@
         "robox.ts"
     ],
     "testFiles": [],
+    "yotta": {},
     "public": true
 }
